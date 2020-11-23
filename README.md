@@ -19,8 +19,10 @@ Desconozco como se hace en otros WM por lo que tendrás que averiguarlo tú.
 3. Agregar una regla udev para hacer que el grupo video pueda escribir al archivo "brightness"
 que se encuentra en /sys/class/backlight/??/brightness donde ?? corresponde al modulo de la GPU
 que estés usando. Para ello crea el archivo /etc/udev/rules.d/backlight.rules y agregale esto:
+
 ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="??", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
 ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="??", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
+
 OJO: Edita el ?? por el modulo que tu tu kernel use para la GPU, en mi caso sería "amdgpu_bl0"
 Visita https://wiki.archlinux.org/index.php/backlight para más información. En el script vienen mas ejemplos de los modulos!
 Por si deseas checarlos.
